@@ -22,6 +22,7 @@ class EvacCenterResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
     protected static ?string $navigationGroup = 'Facility Management';
     protected static ?int $navigationSort = 1;
+    protected static ?string $modelLabel = 'Evacuation Center';
 
     public static function form(Form $form): Form
     {
