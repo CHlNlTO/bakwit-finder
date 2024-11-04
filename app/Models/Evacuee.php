@@ -10,34 +10,44 @@ class Evacuee extends Model
     use HasFactory;
 
     protected $fillable = [
-        'last_name', 
-        'first_name', 
-        'middle_name', 
-        'gender', 
-        'birth_date', 
-        'age', 
-        'religion', 
-        'nationality', 
-        'address', 
-        'contact_number', 
-        'email', 
-        'sector', 
-        'barangay_id', 
-        'evac_center_id',
+        'family_id',
+        'last_name',
+        'first_name',
+        'middle_name',
+        'gender',
+        'birth_date',
+        'age',
+        'religion',
+        'nationality',
+        'address',
+        'contact_number',
+        'email',
     ];
 
-    public function barangay()
+    protected $casts = [
+        'birth_date' => 'date',
+    ];
+
+    // An evacuee belongs to one family
+    public function family()
     {
-        return $this->belongsTo(Barangay::class);
+        return $this->belongsTo(Family::class);
     }
+
+    // Helper methods to get evacuation center and barangay through family relationship
+    // public function barangay()
+    // {
+    //     return $this->family->barangay();
+    // }
 
     public function evacCenter()
     {
-        return $this->belongsTo(EvacCenter::class);
+        return $this->family->evacCenter();
     }
 
-    public function familyMembers()
+    // Helper method to get full name
+    public function getFullNameAttribute()
     {
-        return $this->hasMany(EvacueeFamilyMember::class);
+        return trim("{$this->last_name}, {$this->first_name} {$this->middle_name}");
     }
 }

@@ -13,22 +13,20 @@ return new class extends Migration
     {
         Schema::create('evacuees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained()->onDelete('cascade');
-            $table->foreignId('evac_center_id')->constrained()->onDelete('cascade');
+            $table->foreignId('family_id')->constrained()->onDelete('cascade');
             $table->string('last_name');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
-            $table->string('gender');
-            $table->date('birth_date');
-            $table->integer('age');
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->integer('age')->nullable();
             $table->string('religion')->nullable();
             $table->string('nationality')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('email')->nullable();
-            $table->string('sector')->nullable();
             $table->timestamps();
-        });        
+        });
     }
 
     /**
